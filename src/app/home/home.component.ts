@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {HousingLocationComponent} from '../housing-location/housing-location.component';
-import { CommonModule } from '@angular/common';
-
+import {HousingLocation} from '../housinglocation';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HousingLocationComponent,CommonModule],
+  imports: [CommonModule, HousingLocationComponent],
   template: `
     <section>
       <form>
@@ -14,11 +14,21 @@ import { CommonModule } from '@angular/common';
       </form>
     </section>
     <section class="results">
-      <app-housing-location></app-housing-location>
+      <app-housing-location [housingLocation]="housingLocation"></app-housing-location>
     </section>
   `,
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
+  readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
+  housingLocation: HousingLocation = {
+    id: 9999,
+    name: 'Test Home',
+    city: 'Test city',
+    state: 'ST',
+    photo: `${this.baseUrl}/example-house.jpg`,
+    availableUnits: 99,
+    wifi: true,
+    laundry: false,
+  };
 }
